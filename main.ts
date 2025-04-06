@@ -1,35 +1,37 @@
 
+import { Serie } from './Serie.js';
+import { series } from './data.js';
 
-  export class Serie {
-    id: number;
-    nombre: string;
-    plataforma: string;
-    tipo: string;
-    link: string;
-    imagen: string;
+const seriesTbody: HTMLElement = document.getElementById('series')!; 
+const tableFoot: HTMLElement = document.getElementById('footTable')!;
 
-    
-    constructor(id: number, nombre: string, plataforma: string, tipo: string, link: string, imagen: string) {
-      this.id = id;
-        this.nombre = nombre;
-        this.plataforma = plataforma;
-        this.tipo = tipo;
-        this.link = link;
-        this.imagen = imagen;
-    }
-    
-    
-  }
-
-const coursesTbody: HTMLElement = document.getElementById('series')!; 
-
-function renderCoursesInTable(series: Serie[]): void {
-  series.forEach(s => {
+function renderSeries(Series: Serie[]): void {
+  Series.forEach(s => {
       let trElement = document.createElement("tr");
       trElement.innerHTML = `<td>${s.id}</td>
-                         <td>${s.nombre}</td>
-                         <td>${s.plataforma}</td>
-                         <td>${s.tipo}</td>`;
-      coursesTbody.appendChild(trElement);
+                         <td><a href="${s.link}" target="_blank">${s.title}</a></td>
+                         <td>${s.platform}</td>
+                         <td>${s.seasons}</td>`;
+
+      seriesTbody.appendChild(trElement);
   });
 }
+
+function getTotalCredits(Series: Serie[]): number {
+    let totalSeasons: number = 0;
+    Series.forEach((Serie) => totalSeasons = totalSeasons + Serie.seasons);
+    let totalSeries = Series.length;
+    return totalSeasons/totalSeries;
+  }
+
+renderSeries(series);
+  let promSeasons = getTotalCredits(series);
+  let row = document.createElement("tr");
+  row.innerHTML = `
+    <td>Seasons Average: ${promSeasons}</td>
+  `;
+  
+  tableFoot.appendChild(row);
+
+
+

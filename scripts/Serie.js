@@ -1,12 +1,12 @@
 var Serie = /** @class */ (function () {
     function Serie(id, nombre, plataforma, temporadas, sinopsis, link, imagen) {
         this.id = id;
-        this.nombre = nombre;
-        this.plataforma = plataforma;
-        this.temporadas = temporadas;
-        this.sinopsis = sinopsis;
+        this.title = nombre;
+        this.platform = plataforma;
+        this.seasons = temporadas;
+        this.description = sinopsis;
         this.link = link;
-        this.imagen = imagen;
+        this.image = imagen;
     }
     return Serie;
 }());
